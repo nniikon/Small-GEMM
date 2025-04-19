@@ -13,16 +13,21 @@ cmake --build build
 
 Compared two fastest algorithms against [OpenBLAS](https://github.com/OpenMathLib/OpenBLAS):
 
-<p float="left">
-  <figure style="display:inline-block; text-align:center; margin-right:2%">
-    <img src="./media/perf_avx256.png" width="82%" />
-    <figcaption>Test on AVX-2 CPU: AMD Ryzen 5 5600H</figcaption>
-  </figure>
-  <figure style="display:inline-block; text-align:center;">
-    <img src="./media/perf_avx512.png" width="82%" />
-    <figcaption>Test on AVX-512 CPU: Intel Core i5-11400F</figcaption>
-  </figure>
-</p>
+<div align="center">
+  <table>
+    <tr>
+      <td align="center">
+        <img src="./media/perf_avx256.png" width="92%"><br>
+        <sub>Tests on AVX-2 CPU: AMD Ryzen 5 5600H</sub>
+      </td>
+      <td align="center">
+        <img src="./media/perf_avx512.png" width="92%"><br>
+        <sub>Tests on AVX-512 CPU: Intel Core i5-11400F</sub>
+      </td>
+    </tr>
+  </table>
+</div>
+
 
 ## Test
 
