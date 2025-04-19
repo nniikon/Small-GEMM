@@ -33,9 +33,4 @@ MatmulStatus matmul_vec_kernel(size_t m, size_t n, size_t k,
                                const float* __restrict __attribute((aligned(32))) b,
                                float*       __restrict __attribute((aligned(32))) c);
 
-MatmulStatus matmul_kernel8x8(size_t M, size_t N, size_t K,
-                              const float* __restrict __attribute__((aligned(32))) a,
-                              const float* __restrict __attribute__((aligned(32))) b,
-                              float*       __restrict __attribute__((aligned(32))) c);
-
 #endif // MATMUL_H_
