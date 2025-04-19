@@ -191,7 +191,7 @@ MatmulStatus matmul_kernel(
     __m512 c15 = _mm512_setzero_ps();
 
     for (size_t k = 0; k < K; ++k) {
-        __m512 b_vec = _mm512_load_ps(&b[k * N]);
+        __m512 b_vec = _mm512_loadu_ps(&b[k * N]);
 
         c0  = _mm512_fmadd_ps(_mm512_set1_ps(a[ 0 * K + k]), b_vec, c0);
         c1  = _mm512_fmadd_ps(_mm512_set1_ps(a[ 1 * K + k]), b_vec, c1);
@@ -211,22 +211,22 @@ MatmulStatus matmul_kernel(
         c15 = _mm512_fmadd_ps(_mm512_set1_ps(a[15 * K + k]), b_vec, c15);
     }
 
-    _mm512_store_ps(&c[ 0 * N], c0);
-    _mm512_store_ps(&c[ 1 * N], c1);
-    _mm512_store_ps(&c[ 2 * N], c2);
-    _mm512_store_ps(&c[ 3 * N], c3);
-    _mm512_store_ps(&c[ 4 * N], c4);
-    _mm512_store_ps(&c[ 5 * N], c5);
-    _mm512_store_ps(&c[ 6 * N], c6);
-    _mm512_store_ps(&c[ 7 * N], c7);
-    _mm512_store_ps(&c[ 8 * N], c8);
-    _mm512_store_ps(&c[ 9 * N], c9);
-    _mm512_store_ps(&c[10 * N], c10);
-    _mm512_store_ps(&c[11 * N], c11);
-    _mm512_store_ps(&c[12 * N], c12);
-    _mm512_store_ps(&c[13 * N], c13);
-    _mm512_store_ps(&c[14 * N], c14);
-    _mm512_store_ps(&c[15 * N], c15);
+    _mm512_storeu_ps(&c[ 0 * N], c0);
+    _mm512_storeu_ps(&c[ 1 * N], c1);
+    _mm512_storeu_ps(&c[ 2 * N], c2);
+    _mm512_storeu_ps(&c[ 3 * N], c3);
+    _mm512_storeu_ps(&c[ 4 * N], c4);
+    _mm512_storeu_ps(&c[ 5 * N], c5);
+    _mm512_storeu_ps(&c[ 6 * N], c6);
+    _mm512_storeu_ps(&c[ 7 * N], c7);
+    _mm512_storeu_ps(&c[ 8 * N], c8);
+    _mm512_storeu_ps(&c[ 9 * N], c9);
+    _mm512_storeu_ps(&c[10 * N], c10);
+    _mm512_storeu_ps(&c[11 * N], c11);
+    _mm512_storeu_ps(&c[12 * N], c12);
+    _mm512_storeu_ps(&c[13 * N], c13);
+    _mm512_storeu_ps(&c[14 * N], c14);
+    _mm512_storeu_ps(&c[15 * N], c15);
 
     return MATMUL_STATUS_OK;
 }

@@ -3,11 +3,11 @@
 #include <cassert>
 #include <cstdio>
 #include <cstdlib>
+#include <cstring>
 
 #include <immintrin.h>
 
-#include <blis.h>
-#include <cblas.h>
+#include <openblas/cblas.h>
 
 const size_t ALIGNEMENT = 32; // AVX2
 
