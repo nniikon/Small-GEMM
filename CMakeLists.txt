@@ -51,11 +51,47 @@ set(CMAKE_CXX_FLAGS_DEBUG "${CMAKE_CXX_FLAGS_DEBUG} \
     -fsanitize=address,bool,bounds,enum,float-cast-overflow,float-divide-by-zero,integer-divide-by-zero,leak,nonnull-attribute,null,object-size,return,returns-nonnull-attribute,shift,signed-integer-overflow,undefined,unreachable,vla-bound,vptr"
 )
 
-add_executable(tests
-    ${PROJECT_SOURCE_DIR}/main.cpp
-    ${PROJECT_SOURCE_DIR}/matmul.cpp
-)
+set(BUILD_TYPE "" CACHE STRING "Build type: STATIC, SHARED, or EXECUTABLE")
+set_property(CACHE BUILD_TYPE PROPERTY STRINGS STATIC SHARED EXECUTABLE)
 
-target_link_libraries(tests
-    openblas
-)
+if(NOT BUILD_TYPE)
+    message(FATAL_ERROR "You must specify BUILD_TYPE (STATIC, SHARED, or EXECUTABLE)")
+endif()
+
+set(MATRIXMUL_SOURCES ${PROJECT_SOURCE_DIR}/matmul.cpp)
+
+if(BUILD_STATIC)
+    add_library(matrixmul STATIC ${MATRIXMUL_SOURCES})
+endif()
+
+if(BUILD_SHARED)
+    add_library(matrixmul SHARED ${MATRIXMUL_SOURCES})
+endif()
+
+if(BUILD_TEST)
+    add_executable(tests
+        ${PROJECT_SOURCE_DIR}/test.cpp
+        ${PROJECT_SOURCE_DIR}/matmul.cpp
+    )
+
+    target_link_libraries(tests PRIVATE openblas)
+endif()
+
+if(BUILD_TYPE STREQUAL "STATIC")
+    add_library(matrixmul STATIC ${MATRIXMUL_SOURCES})
+
+elseif(BUILD_TYPE STREQUAL "SHARED")
+    add_library(matrixmul SHARED ${MATRIXMUL_SOURCES})
+
+elseif(BUILD_TYPE STREQUAL "EXECUTABLE")
+    add_executable(tests
+        ${PROJECT_SOURCE_DIR}/test.cpp
+        ${PROJECT_SOURCE_DIR}/matmul.cpp
+    )
+
+    target_link_libraries(tests PRIVATE openblas)
+
+else()
+    message(FATAL_ERROR "Invalid BUILD_TYPE: ${BUILD_TYPE}. Valid options: STATIC, SHARED, EXECUTABLE.")
+endif()
+
