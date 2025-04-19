@@ -8,7 +8,7 @@ import numpy as np
 
 default_algorithms = ["openblas", "unroll", "kernel"]
 WARMUP_RUNS = 2
-MEASURE_RUNS = 5
+MEASURE_RUNS = 10
 DEFAULT_TESTS_PATH = "tests.txt"
 DEFAULT_EXEC_PATH = "./build/tests"
 

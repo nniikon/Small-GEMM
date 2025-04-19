@@ -14,6 +14,7 @@ set(CMAKE_CXX_FLAGS_RELEASE "${CMAKE_CXX_FLAGS_RELEASE} \
 set(CMAKE_CXX_FLAGS_DEBUG "${CMAKE_CXX_FLAGS_DEBUG} \
     -g \
     -O0 \
+    -march=native \
     -Wall \
     -Wmissing-declarations \
     -Wcast-align \
@@ -57,5 +58,4 @@ add_executable(tests
 
 target_link_libraries(tests
     openblas
-    blis
 )
